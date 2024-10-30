@@ -1,19 +1,19 @@
-import { Link } from 'react-router-dom';
-import CallToAction from '../components/CallToAction';
-import { useEffect, useState } from 'react';
-import PostCard from '../components/PostCard';
+import { Link } from 'react-router-dom'
+import CallToAction from '../components/CallToAction'
+import { useEffect, useState } from 'react'
+import PostCard from '../components/PostCard'
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/post/getPosts');
-      const data = await res.json();
-      setPosts(data.posts);
-    };
-    fetchPosts();
-  }, []);
+      const res = await fetch('/api/post/getPosts')
+      const data = await res.json()
+      setPosts(data.posts)
+    }
+    fetchPosts()
+  }, [])
   return (
     <div>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
@@ -29,7 +29,7 @@ export default function Home() {
           View all posts
         </Link>
       </div>
-      <div className='p-3 bg-amber-100 dark:bg-slate-700'>
+      <div className='p-3  dark:bg-slate-700'>
         <CallToAction />
       </div>
 
@@ -52,5 +52,5 @@ export default function Home() {
         )}
       </div>
     </div>
-  );
+  )
 }

@@ -1,71 +1,71 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
   HiAnnotation,
   HiArrowNarrowUp,
   HiDocumentText,
   HiOutlineUserGroup,
-} from 'react-icons/hi';
-import { Button, Table } from 'flowbite-react';
-import { Link } from 'react-router-dom';
+} from 'react-icons/hi'
+import { Button, Table } from 'flowbite-react'
+import { Link } from 'react-router-dom'
 
 export default function DashboardComp() {
-  const [users, setUsers] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [totalPosts, setTotalPosts] = useState(0);
-  const [totalComments, setTotalComments] = useState(0);
-  const [lastMonthUsers, setLastMonthUsers] = useState(0);
-  const [lastMonthPosts, setLastMonthPosts] = useState(0);
-  const [lastMonthComments, setLastMonthComments] = useState(0);
-  const { currentUser } = useSelector((state) => state.user);
+  const [users, setUsers] = useState([])
+  const [comments, setComments] = useState([])
+  const [posts, setPosts] = useState([])
+  const [totalUsers, setTotalUsers] = useState(0)
+  const [totalPosts, setTotalPosts] = useState(0)
+  const [totalComments, setTotalComments] = useState(0)
+  const [lastMonthUsers, setLastMonthUsers] = useState(0)
+  const [lastMonthPosts, setLastMonthPosts] = useState(0)
+  const [lastMonthComments, setLastMonthComments] = useState(0)
+  const { currentUser } = useSelector((state) => state.user)
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch('/api/user/getusers?limit=5');
-        const data = await res.json();
+        const res = await fetch('/api/user/getusers?limit=5')
+        const data = await res.json()
         if (res.ok) {
-          setUsers(data.users);
-          setTotalUsers(data.totalUsers);
-          setLastMonthUsers(data.lastMonthUsers);
+          setUsers(data.users)
+          setTotalUsers(data.totalUsers)
+          setLastMonthUsers(data.lastMonthUsers)
         }
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
-    };
+    }
     const fetchPosts = async () => {
       try {
-        const res = await fetch('/api/post/getposts?limit=5');
-        const data = await res.json();
+        const res = await fetch('/api/post/getposts?limit=5')
+        const data = await res.json()
         if (res.ok) {
-          setPosts(data.posts);
-          setTotalPosts(data.totalPosts);
-          setLastMonthPosts(data.lastMonthPosts);
+          setPosts(data.posts)
+          setTotalPosts(data.totalPosts)
+          setLastMonthPosts(data.lastMonthPosts)
         }
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
-    };
+    }
     const fetchComments = async () => {
       try {
-        const res = await fetch('/api/comment/getcomments?limit=5');
-        const data = await res.json();
+        const res = await fetch('/api/comment/getcomments?limit=5')
+        const data = await res.json()
         if (res.ok) {
-          setComments(data.comments);
-          setTotalComments(data.totalComments);
-          setLastMonthComments(data.lastMonthComments);
+          setComments(data.comments)
+          setTotalComments(data.totalComments)
+          setLastMonthComments(data.lastMonthComments)
         }
       } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
-    };
-    if (currentUser.isAdmin) {
-      fetchUsers();
-      fetchPosts();
-      fetchComments();
     }
-  }, [currentUser]);
+    if (currentUser.isAdmin) {
+      fetchUsers()
+      fetchPosts()
+      fetchComments()
+    }
+  }, [currentUser])
   return (
     <div className='p-3 md:mx-auto'>
       <div className='flex-wrap flex gap-4 justify-center'>
@@ -124,7 +124,7 @@ export default function DashboardComp() {
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
           <div className='flex justify-between  p-3 text-sm font-semibold'>
             <h1 className='text-center p-2'>Recent users</h1>
-            <Button outline gradientDuoTone='purpleToPink'>
+            <Button outline>
               <Link to={'/dashboard?tab=users'}>See all</Link>
             </Button>
           </div>
@@ -153,7 +153,7 @@ export default function DashboardComp() {
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
           <div className='flex justify-between  p-3 text-sm font-semibold'>
             <h1 className='text-center p-2'>Recent comments</h1>
-            <Button outline gradientDuoTone='purpleToPink'>
+            <Button outline>
               <Link to={'/dashboard?tab=comments'}>See all</Link>
             </Button>
           </div>
@@ -167,7 +167,7 @@ export default function DashboardComp() {
                 <Table.Body key={comment._id} className='divide-y'>
                   <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                     <Table.Cell className='w-96'>
-                        <p className='line-clamp-2'>{comment.content}</p>
+                      <p className='line-clamp-2'>{comment.content}</p>
                     </Table.Cell>
                     <Table.Cell>{comment.numberOfLikes}</Table.Cell>
                   </Table.Row>
@@ -178,7 +178,7 @@ export default function DashboardComp() {
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
           <div className='flex justify-between  p-3 text-sm font-semibold'>
             <h1 className='text-center p-2'>Recent posts</h1>
-            <Button outline gradientDuoTone='purpleToPink'>
+            <Button outline>
               <Link to={'/dashboard?tab=posts'}>See all</Link>
             </Button>
           </div>
@@ -208,5 +208,5 @@ export default function DashboardComp() {
         </div>
       </div>
     </div>
-  );
+  )
 }
