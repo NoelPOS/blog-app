@@ -39,89 +39,89 @@ import painting from '../../assets/painting.jpg'
 export default function About() {
   return (
     <div className='min-h-screen bg-gradient-to-b from-teal-50 to-teal-100 py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-4xl mx-auto'>
-        <h1 className='text-4xl font-bold text-center text-teal-800 mb-8'>
-          Welcome to Mindful Moments
-        </h1>
-
-        <p className='text-xl text-center text-gray-600 mb-12'>
-          Your journey to inner peace and mindfulness begins here.
-        </p>
-
-        <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-          <div className='bg-white rounded-lg shadow-md overflow-hidden'>
-            <div className='p-6'>
-              <img
-                src={painting}
-                alt='Serene painting'
-                width={300}
-                height={200}
-                className='rounded-lg mb-4 w-full h-auto'
-              />
-              <h2 className='text-2xl font-semibold text-teal-700 mb-2'>
-                Healing through Art
-              </h2>
-              <p className='text-gray-600'>
-                Explore our collection of calming paintings that inspire
-                reflection and tranquility. Let the colors and forms guide you
-                to a place of inner stillness.
-              </p>
-            </div>
-          </div>
-
-          <div className='bg-white rounded-lg shadow-md overflow-hidden'>
-            <div className='p-6'>
-              <img
-                src={painting}
-                alt='Person meditating'
-                width={300}
-                height={200}
-                className='rounded-lg mb-4 w-full h-auto'
-              />
-              <h2 className='text-2xl font-semibold text-teal-700 mb-2'>
-                Guided Meditations
-              </h2>
-              <p className='text-gray-600'>
-                Through meditation reduce stress, and find your center amidst
-                life's chaos.
-              </p>
-            </div>
-          </div>
-
-          <div className='bg-white rounded-lg shadow-md overflow-hidden'>
-            <div className='p-6'>
-              <img
-                src={painting}
-                alt='Therapy session'
-                width={300}
-                height={200}
-                className='rounded-lg mb-4 w-full h-auto'
-              />
-              <h2 className='text-2xl font-semibold text-teal-700 mb-2'>
-                Mindful Therapy
-              </h2>
-              <p className='text-gray-600'>
-                Connect with me to help you navigate life's challenges with
-                greater ease and clarity.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className='mt-12 text-center'>
-          <h3 className='text-2xl font-semibold text-teal-800 mb-4'>
-            Begin Your Journey to Inner Peace
-          </h3>
-          <p className='text-lg text-gray-600 mb-6'>
-            Whether you're seeking a moment of calm through our curated
-            artworks, looking to deepen your meditation practice, or in need of
-            supportive therapy, we're here to guide you on your path to
-            mindfulness and well-being.
+      <div className='max-w-3xl mx-auto'>
+        <header className='text-center mb-12'>
+          <h1 className='text-4xl font-bold text-teal-800 mb-4'>
+            Sarah Johnson
+          </h1>
+          <p className='text-xl text-gray-600'>
+            Mindfulness Blogger | Artist | Meditation Guide
           </p>
-          <button className='bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out'>
-            Explore Our Resources
-          </button>
+        </header>
+
+        <div className='flex flex-col md:flex-row items-center md:items-start gap-8 mb-12'>
+          <img
+            src={painting}
+            alt='Sarah Johnson'
+            className='w-64 h-64 rounded-full object-cover shadow-lg'
+          />
+          <div className='flex-1'>
+            <h2 className='text-2xl font-semibold text-teal-700 mb-4'>
+              About Me
+            </h2>
+            <p className='text-gray-600 mb-4'>
+              Hello! I'm Sarah, a passionate writer and mindfulness
+              practitioner. Through my blog, I share insights on meditation,
+              mindful living, and the healing power of art. With over a decade
+              of experience in mindfulness practices, I aim to help others find
+              peace and balance in their daily lives.
+            </p>
+            <p className='text-gray-600'>
+              When I'm not writing or meditating, you can find me painting
+              serene landscapes or hiking in nature, always seeking new
+              inspiration for my work and life.
+            </p>
+          </div>
         </div>
+
+        <section className='mb-12'>
+          <h2 className='text-2xl font-semibold text-teal-700 mb-4'>
+            My Blog Focus
+          </h2>
+          <div className='grid gap-6 md:grid-cols-3'>
+            <div className='bg-white rounded-lg shadow-md p-6'>
+              <h3 className='text-xl font-semibold text-teal-600 mb-2'>
+                Mindful Living
+              </h3>
+              <p className='text-gray-600'>
+                Practical tips and reflections on incorporating mindfulness into
+                everyday life.
+              </p>
+            </div>
+            <div className='bg-white rounded-lg shadow-md p-6'>
+              <h3 className='text-xl font-semibold text-teal-600 mb-2'>
+                Art Therapy
+              </h3>
+              <p className='text-gray-600'>
+                Exploring the healing and meditative aspects of creating and
+                appreciating art.
+              </p>
+            </div>
+            <div className='bg-white rounded-lg shadow-md p-6'>
+              <h3 className='text-xl font-semibold text-teal-600 mb-2'>
+                Guided Meditations
+              </h3>
+              <p className='text-gray-600'>
+                Written and audio guides to help you deepen your meditation
+                practice.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className='text-center'>
+          <h2 className='text-2xl font-semibold text-teal-700 mb-4'>
+            Let's Connect
+          </h2>
+          <p className='text-gray-600 mb-6'>
+            I love hearing from my readers! Whether you have questions about
+            mindfulness, want to share your own experiences, or just want to say
+            hello, don't hesitate to reach out.
+          </p>
+          <button className='bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full transition duration-300 ease-in-out'>
+            Contact Me
+          </button>
+        </section>
       </div>
     </div>
   )
