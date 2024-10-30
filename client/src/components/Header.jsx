@@ -125,9 +125,11 @@ export default function Header() {
             <Link to='/dashboard?tab=dash'>Dashboard</Link>
           </Navbar.Link>
         )}
-        <Navbar.Link active={path === '/create-post'} as={'div'}>
-          <Link to='/create-post'>Create Post</Link>
-        </Navbar.Link>
+        {currentUser && currentUser.isAdmin && (
+          <Navbar.Link active={path === '/create-post'} as={'div'}>
+            <Link to='/create-post'>Create Post</Link>
+          </Navbar.Link>
+        )}
       </Navbar.Collapse>
     </Navbar>
   )
