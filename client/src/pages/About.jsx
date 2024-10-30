@@ -34,6 +34,8 @@
 //   )
 // }
 
+import painting from '../../assets/painting.jpg'
+
 export default function About() {
   return (
     <div className='min-h-screen bg-gradient-to-b from-teal-50 to-teal-100 py-12 px-4 sm:px-6 lg:px-8'>
@@ -50,7 +52,7 @@ export default function About() {
           <div className='bg-white rounded-lg shadow-md overflow-hidden'>
             <div className='p-6'>
               <img
-                src='/placeholder.svg?height=200&width=300'
+                src={painting}
                 alt='Serene painting'
                 width={300}
                 height={200}
@@ -70,7 +72,7 @@ export default function About() {
           <div className='bg-white rounded-lg shadow-md overflow-hidden'>
             <div className='p-6'>
               <img
-                src='/placeholder.svg?height=200&width=300'
+                src={painting}
                 alt='Person meditating'
                 width={300}
                 height={200}
@@ -80,9 +82,8 @@ export default function About() {
                 Guided Meditations
               </h2>
               <p className='text-gray-600'>
-                Discover our library of guided meditations designed to help you
-                cultivate mindfulness, reduce stress, and find your center
-                amidst life's chaos.
+                Through meditation reduce stress, and find your center amidst
+                life's chaos.
               </p>
             </div>
           </div>
@@ -90,7 +91,7 @@ export default function About() {
           <div className='bg-white rounded-lg shadow-md overflow-hidden'>
             <div className='p-6'>
               <img
-                src='/placeholder.svg?height=200&width=300'
+                src={painting}
                 alt='Therapy session'
                 width={300}
                 height={200}
@@ -100,9 +101,8 @@ export default function About() {
                 Mindful Therapy
               </h2>
               <p className='text-gray-600'>
-                Connect with our experienced therapists who specialize in
-                mindfulness-based approaches to help you navigate life's
-                challenges with greater ease and clarity.
+                Connect with me to help you navigate life's challenges with
+                greater ease and clarity.
               </p>
             </div>
           </div>

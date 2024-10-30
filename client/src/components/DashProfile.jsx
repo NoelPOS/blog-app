@@ -1,15 +1,15 @@
-import { Alert, Button, Modal, ModalBody, TextInput } from 'flowbite-react';
-import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Alert, Button, Modal, ModalBody, TextInput } from 'flowbite-react'
+import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from 'firebase/storage';
-import { app } from '../firebase';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+} from 'firebase/storage'
+import { app } from '../firebase'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 import {
   updateStart,
   updateSuccess,
@@ -18,36 +18,36 @@ import {
   deleteUserSuccess,
   deleteUserFailure,
   signoutSuccess,
-} from '../redux/user/userSlice';
-import { useDispatch } from 'react-redux';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+} from '../redux/user/userSlice'
+import { useDispatch } from 'react-redux'
+import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 
 export default function DashProfile() {
-  const { currentUser, error, loading } = useSelector((state) => state.user);
-  const [imageFile, setImageFile] = useState(null);
-  const [imageFileUrl, setImageFileUrl] = useState(null);
-  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
-  const [imageFileUploadError, setImageFileUploadError] = useState(null);
-  const [imageFileUploading, setImageFileUploading] = useState(false);
-  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
-  const [updateUserError, setUpdateUserError] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({});
-  const filePickerRef = useRef();
-  const dispatch = useDispatch();
+  const { currentUser, error, loading } = useSelector((state) => state.user)
+  const [imageFile, setImageFile] = useState(null)
+  const [imageFileUrl, setImageFileUrl] = useState(null)
+  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null)
+  const [imageFileUploadError, setImageFileUploadError] = useState(null)
+  const [imageFileUploading, setImageFileUploading] = useState(false)
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null)
+  const [updateUserError, setUpdateUserError] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [formData, setFormData] = useState({})
+  const filePickerRef = useRef()
+  const dispatch = useDispatch()
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-      setImageFile(file);
-      setImageFileUrl(URL.createObjectURL(file));
+      setImageFile(file)
+      setImageFileUrl(URL.createObjectURL(file))
     }
-  };
+  }
   useEffect(() => {
     if (imageFile) {
-      uploadImage();
+      uploadImage()
     }
-  }, [imageFile]);
+  }, [imageFile])
 
   const uploadImage = async () => {
     // service firebase.storage {
@@ -60,110 +60,109 @@ export default function DashProfile() {
     //     }
     //   }
     // }
-    setImageFileUploading(true);
-    setImageFileUploadError(null);
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + imageFile.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    setImageFileUploading(true)
+    setImageFileUploadError(null)
+    const storage = getStorage(app)
+    const fileName = new Date().getTime() + imageFile.name
+    const storageRef = ref(storage, fileName)
+    const uploadTask = uploadBytesResumable(storageRef, imageFile)
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
 
-        setImageFileUploadProgress(progress.toFixed(0));
+        setImageFileUploadProgress(progress.toFixed(0))
       },
       (error) => {
         setImageFileUploadError(
           'Could not upload image (File must be less than 2MB)'
-        );
-        setImageFileUploadProgress(null);
-        setImageFile(null);
-        setImageFileUrl(null);
-        setImageFileUploading(false);
+        )
+        setImageFileUploadProgress(null)
+        setImageFile(null)
+        setImageFileUrl(null)
+        setImageFileUploading(false)
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageFileUrl(downloadURL);
-          setFormData({ ...formData, profilePicture: downloadURL });
-          setImageFileUploading(false);
-        });
+          setImageFileUrl(downloadURL)
+          setFormData({ ...formData, profilePicture: downloadURL })
+          setImageFileUploading(false)
+        })
       }
-    );
-  };
+    )
+  }
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.id]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setUpdateUserError(null);
-    setUpdateUserSuccess(null);
+    e.preventDefault()
+    setUpdateUserError(null)
+    setUpdateUserSuccess(null)
     if (Object.keys(formData).length === 0) {
-      setUpdateUserError('No changes made');
-      return;
+      setUpdateUserError('No changes made')
+      return
     }
     if (imageFileUploading) {
-      setUpdateUserError('Please wait for image to upload');
-      return;
+      setUpdateUserError('Please wait for image to upload')
+      return
     }
     try {
-      dispatch(updateStart());
+      dispatch(updateStart())
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
-      const data = await res.json();
+      })
+      const data = await res.json()
       if (!res.ok) {
-        dispatch(updateFailure(data.message));
-        setUpdateUserError(data.message);
+        dispatch(updateFailure(data.message))
+        setUpdateUserError(data.message)
       } else {
-        dispatch(updateSuccess(data));
-        setUpdateUserSuccess("User's profile updated successfully");
+        dispatch(updateSuccess(data))
+        setUpdateUserSuccess("User's profile updated successfully")
       }
     } catch (error) {
-      dispatch(updateFailure(error.message));
-      setUpdateUserError(error.message);
+      dispatch(updateFailure(error.message))
+      setUpdateUserError(error.message)
     }
-  };
+  }
   const handleDeleteUser = async () => {
-    setShowModal(false);
+    setShowModal(false)
     try {
-      dispatch(deleteUserStart());
+      dispatch(deleteUserStart())
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
-      });
-      const data = await res.json();
+      })
+      const data = await res.json()
       if (!res.ok) {
-        dispatch(deleteUserFailure(data.message));
+        dispatch(deleteUserFailure(data.message))
       } else {
-        dispatch(deleteUserSuccess(data));
+        dispatch(deleteUserSuccess(data))
       }
     } catch (error) {
-      dispatch(deleteUserFailure(error.message));
+      dispatch(deleteUserFailure(error.message))
     }
-  };
+  }
 
   const handleSignout = async () => {
     try {
       const res = await fetch('/api/user/signout', {
         method: 'POST',
-      });
-      const data = await res.json();
+      })
+      const data = await res.json()
       if (!res.ok) {
-        console.log(data.message);
+        console.log(data.message)
       } else {
-        dispatch(signoutSuccess());
+        dispatch(signoutSuccess())
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
-  };
+  }
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
       <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
@@ -301,5 +300,5 @@ export default function DashProfile() {
         </Modal.Body>
       </Modal>
     </div>
-  );
+  )
 }
