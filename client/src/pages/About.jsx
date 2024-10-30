@@ -41,35 +41,29 @@ export default function About() {
     <div className='min-h-screen bg-gradient-to-b from-teal-50 to-teal-100 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-3xl mx-auto'>
         <header className='text-center mb-12'>
-          <h1 className='text-4xl font-bold text-teal-800 mb-4'>
-            Sarah Johnson
-          </h1>
+          <h1 className='text-4xl font-bold text-teal-800 mb-4'>Vet Mi Mi</h1>
           <p className='text-xl text-gray-600'>
-            Mindfulness Blogger | Artist | Meditation Guide
+            Art- Psychotherapist | Mindfulness Blogger | Artist | Meditation
+            Guide
           </p>
         </header>
 
-        <div className='flex flex-col md:flex-row items-center md:items-start gap-8 mb-12'>
+        <div className='flex flex-col md:flex-row items-center md:items-center gap-8 mb-12'>
           <img
             src={painting}
-            alt='Sarah Johnson'
+            alt='Vet MiMi'
             className='w-64 h-64 rounded-full object-cover shadow-lg'
           />
-          <div className='flex-1'>
+          <div className='flex-1 '>
             <h2 className='text-2xl font-semibold text-teal-700 mb-4'>
               About Me
             </h2>
-            <p className='text-gray-600 mb-4'>
-              Hello! I'm Sarah, a passionate writer and mindfulness
-              practitioner. Through my blog, I share insights on meditation,
-              mindful living, and the healing power of art. With over a decade
-              of experience in mindfulness practices, I aim to help others find
-              peace and balance in their daily lives.
-            </p>
-            <p className='text-gray-600'>
-              When I'm not writing or meditating, you can find me painting
-              serene landscapes or hiking in nature, always seeking new
-              inspiration for my work and life.
+            <p className='text-gray-600 mb-4 '>
+              Hello! I'm Vet MiMi, a Art- Psychotherapist. Through my blog, I
+              share insights on meditation, mindful living, and the healing
+              power of art. With over a decade of experience in mindfulness
+              practices, I aim to help others find peace and balance in their
+              daily lives.
             </p>
           </div>
         </div>
