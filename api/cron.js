@@ -1,5 +1,5 @@
 import cron from 'cron'
-import http from 'http'
+import https from 'https'
 
 const backendUrl = 'https://vetmimi-blog.onrender.com'
 // const backendUrl = 'http://localhost:3000'
@@ -7,7 +7,7 @@ const backendUrl = 'https://vetmimi-blog.onrender.com'
 const job = new cron.CronJob('*/14 * * * *', async () => {
   console.log('restarting server')
 
-  http
+  https
     .get(backendUrl, (res) => {
       if (res.statusCode === 200) {
         console.log('Server restarted successfully with cron')
